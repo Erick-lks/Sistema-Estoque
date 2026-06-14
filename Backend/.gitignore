@@ -1,0 +1,10 @@
+# Ignorar o arquivo de configuração do Spring
+application.properties
+
+# Pastas de build
+target/
+
+# IntelliJ / VSCode
+.idea/
+*.iml
+.vscode/
