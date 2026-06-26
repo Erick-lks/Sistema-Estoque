@@ -140,7 +140,7 @@ export default function Produtos() {
   return (
     <div className="w-full h-full">
       <main className="flex-1 p-6 overflow-auto">
-        <div className="flex justify-between items-center bg-amber-900 text-white p-4 rounded-xl">
+        <div className="flex justify-between items-center bg-[#1D162C] text-white p-4 rounded-xl">
           <h1 className="text-2xl font-semibold">Gerenciador de Estoque</h1>
 
           <button
@@ -152,7 +152,7 @@ export default function Produtos() {
 
           {mostrarModal && (
             <div className="fixed inset-0 bg-transparent bg-opacity-10 flex justify-center items-center">
-              <div className="bg-amber-900 p-10 rounded-lg h-120 w-140">
+              <div className="bg-[#261d58] p-10 rounded-lg h-120 w-140">
                 <h2 className="text-xl font-bold mb-4">
                   {modoEdicao ? "Editar Produto" : "Adicionar Produto"}
                 </h2>
@@ -246,7 +246,7 @@ export default function Produtos() {
             <div className="flex justify-end mb-4 p-2  ">
               <input
                 type="text"
-                placeholder="Digite o tipo do Item"
+                placeholder="Digite a categoria do Item"
                 onChange={(e) => {
                   const valor = e.target.value;
                   setBusca(valor);

@@ -51,7 +51,7 @@ export default function Cards({
         className="bg-[#CEBC9A] rounded-2xl p-5 shadow"
       >
         <h3 className="text-black">Itens em Baixo Estoque</h3>{" "}
-        <p className="text-3xl font-bold mt-2 text-amber-900">
+        <p className="text-3xl font-bold mt-2 text-red-700">
           {cards.baixoEstoque}
         </p>
       </div>
