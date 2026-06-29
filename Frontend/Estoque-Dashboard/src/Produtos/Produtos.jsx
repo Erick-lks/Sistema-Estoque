@@ -58,7 +58,7 @@ export default function Produtos() {
   const carregarProdutos = async (pagina = 0, termoBusca = "") => {
     try {
       const endpoint = termoBusca.trim()
-        ? `/Estoque/buscar?tipo=${termoBusca}&page=${pagina}&size=10`
+        ? `/Estoque/buscar?categoria=${termoBusca}&page=${pagina}&size=10`
         : `/Estoque/listar?page=${pagina}&size=10`;
 
       const response = await api.get(endpoint);

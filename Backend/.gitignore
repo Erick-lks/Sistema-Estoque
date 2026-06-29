@@ -1,6 +1,8 @@
 # Ignorar o arquivo de configuração do Spring
 application.properties
 
+/src/main/resources/
+
 # Pastas de build
 target/
 

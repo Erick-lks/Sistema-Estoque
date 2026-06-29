@@ -3,6 +3,7 @@ package com.System.Estoque.Services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,8 @@ public class ServicesProduto{
 
   private final MapperProduto mapper = new MapperProduto();
 
-    private final RepositoryProduto repository = null;
-
+    @Autowired
+    private RepositoryProduto repository;
   
 
  public ResponseEntity<Page<ProdutoResponseDto>> listarTodos(

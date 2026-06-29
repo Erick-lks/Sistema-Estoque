@@ -3,6 +3,7 @@ package com.System.Estoque.Repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.System.Estoque.Entity.Produto;
 
 public interface RepositoryProduto extends JpaRepository<Produto, Long>{
