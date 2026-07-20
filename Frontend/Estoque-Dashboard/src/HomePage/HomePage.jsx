@@ -41,7 +41,7 @@ export default function HomePage() {
     try {
       setLoading(true);
 
-      const response = await api.get("/api/mensagem");
+      const response = await api.get("api/mensagem");
 
       const data = response.data;
 

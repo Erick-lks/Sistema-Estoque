@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/Estoque")
-@CrossOrigin(origins = "http://localhost:5173/")
+@CrossOrigin(origins = "https://sistema-estoque-git-main-erickcaetano1200s-projects.vercel.app/e-git-main-erickcaetano1200s-projects.vercel.app/")
 
 
 
