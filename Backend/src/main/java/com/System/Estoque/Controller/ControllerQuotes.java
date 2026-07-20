@@ -9,7 +9,7 @@ import com.System.Estoque.Services.QuoteService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://sistema-estoque-git-main-erickcaetano1200s-projects.vercel.app/e-git-main-erickcaetano1200s-projects.vercel.app/")
+@CrossOrigin(origins = "http://localhost:5173/")
 public class ControllerQuotes {
 
     private final QuoteService service;
