@@ -10,3 +10,10 @@ target/
 .idea/
 *.iml
 .vscode/
+
+.env
+.env.*
+!.env.example
+
+Sistema de Estoque/.env
+Sistema de Estoque/.env.*
