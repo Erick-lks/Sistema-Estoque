@@ -7,5 +7,3 @@ COPY target/*.jar app.jar
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
-//Deployed Render without but first deployed database with neon 
