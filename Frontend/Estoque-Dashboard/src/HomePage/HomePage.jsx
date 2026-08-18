@@ -41,7 +41,7 @@ export default function HomePage() {
     try {
       setLoading(true);
 
-      const response = await api.get("https://sistema-estoque-git-main-erickcaetano1200s-projects.vercel.app/api/mensagem");
+      const response = await api.get("/api/mensagem");
 
       const data = response.data;
 

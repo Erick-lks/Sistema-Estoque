@@ -23,87 +23,68 @@ import com.System.Estoque.Services.ServicesProduto;
 
 import jakarta.validation.Valid;
 
-
-
 @RestController
 @RequestMapping("/Estoque")
-@CrossOrigin(origins = "https://sistema-estoque-git-main-erickcaetano1200s-projects.vercel.app/e-git-main-erickcaetano1200s-projects.vercel.app/")
-
-
+@CrossOrigin(origins = "https://sistema-estoque-git-main-erickcaetano1200s-projects.vercel.app/e-git-main-erickcaetano1200s-projects.vercel.app")
 
 public class ControllerProduto {
 
-
-
-
     private final ServicesProduto services;
-
 
     ControllerProduto(ServicesProduto services) {
         this.services = services;
     }
 
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarTodos(@PageableDefault(size = 10) Pageable pageable) {
+        return ResponseEntity.ok(services.listarTodos(pageable));
+    }
 
-@GetMapping("/listar")
-public ResponseEntity<?> listarTodos( @PageableDefault(size = 10) Pageable pageable) {
-    return ResponseEntity.ok(services.listarTodos(pageable));
-}
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<?> listarporId(@PathVariable Long id) {
+        return ResponseEntity.ok(services.listarporId(id));
+    }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<?> buscarItem(@RequestParam String categoria, Pageable pageable) {
+        return ResponseEntity.ok(services.buscandoItem(categoria, pageable));
+    }
 
-@GetMapping("/listar/{id}")
-public ResponseEntity<?> listarporId(@PathVariable Long id){
-    return ResponseEntity.ok(services.listarporId(id));
-}
+    @PostMapping("/cadastrar")
+    public ResponseEntity<?> adicionarProduto(@Valid @RequestBody ProdutoRequestDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(services.cadastrarNovoProduto(dto));
+    }
 
-@GetMapping("/buscar")
-public ResponseEntity<?> buscarItem(@RequestParam String categoria, Pageable pageable) {
-    return ResponseEntity.ok(services.buscandoItem(categoria, pageable));
-}
+    @PutMapping("/alterar/{id}")
+    public ResponseEntity<?> alterarProduto(@PathVariable Long id, @RequestBody ProdutoRequestDto dto) {
 
+        return ResponseEntity.ok(services.aletrarproduto(id, dto));
 
+    }
 
-@PostMapping("/cadastrar")
-public ResponseEntity<?> adicionarProduto(@Valid @RequestBody ProdutoRequestDto dto) {
-    return ResponseEntity.status(HttpStatus.CREATED)
-            .body(services.cadastrarNovoProduto(dto));
-}
+    @DeleteMapping("/remover/{id}")
+    public ResponseEntity<?> removerProduto(@PathVariable Long id) {
 
+        return ResponseEntity.ok(services.removerProduto(id));
 
-@PutMapping("/alterar/{id}")
-public ResponseEntity<?> alterarProduto (@PathVariable Long id ,@RequestBody ProdutoRequestDto dto){
-
-  return ResponseEntity.ok(services.aletrarproduto(id, dto));
-
-
-}
-
-
-@DeleteMapping("/remover/{id}")
-public ResponseEntity<?> removerProduto (@PathVariable Long id){
- 
-return ResponseEntity.ok(services.removerProduto(id));
-
-
-}
+    }
 
     public ServicesProduto getServices() {
         return services;
     }
 
-    
     @GetMapping("/total")
     public ResponseEntity<CardResponseDto> getTotalItens() {
 
-
-        return  ResponseEntity.ok(services.findAllItens());
+        return ResponseEntity.ok(services.findAllItens());
     }
 
     @GetMapping("/baixo-estoque")
-public ResponseEntity<Page<ProdutoResponseDto>> baixoEstoque(
-        Pageable pageable) {
+    public ResponseEntity<Page<ProdutoResponseDto>> baixoEstoque(
+            Pageable pageable) {
 
-    return services.baixoEstoque(pageable);
-}
-
+        return services.baixoEstoque(pageable);
+    }
 
 }
