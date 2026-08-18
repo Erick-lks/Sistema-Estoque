@@ -16,14 +16,18 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://sistema-estoque-git-main-erickcaetano1200s-projects.vercel.app/")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedOrigins(
+                                "https://sistema-estoque-seven.vercel.app")
+                        .allowedMethods(
+                                "GET",
+                                "POST",
+                                "PUT",
+                                "DELETE",
+                                "OPTIONS")
+
                         .allowedHeaders("*")
                         .allowCredentials(true);
             }
-
         };
-
     }
-
 }
