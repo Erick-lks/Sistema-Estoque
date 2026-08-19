@@ -57,9 +57,16 @@ export default function Produtos() {
   };
   const carregarProdutos = async (pagina = 0, termoBusca = "") => {
     try {
-      const endpoint = termoBusca.trim()
+
+      /* const endpoint = termoBusca.trim()
         ? `/Estoque/buscar?categoria=${termoBusca}&page=${pagina}&size=10`
-        : `/Estoque/listar`;
+        : `/Estoque/listar?page=${pagina}&size=10`;
+
+        */
+
+         const endpoint = await fetch(
+          "https://sistema-estoque-8p4a.onrender.com/Estoque/listar?page=0&size=10"
+        );
 
       const response = await api.get(endpoint);
 
