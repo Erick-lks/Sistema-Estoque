@@ -55,30 +55,27 @@ export default function Produtos() {
     carregarProdutos();
     setForm({ id: "", produto: "", categoria: "", quantidade: "" });
   };
-  const carregarProdutos = async (pagina = 0, termoBusca = "") => {
-    try {
+const carregarProdutos = async (pagina = 0, termoBusca = "") => {
+  try {
 
-      /* const endpoint = termoBusca.trim()
-        ? `/Estoque/buscar?categoria=${termoBusca}&page=${pagina}&size=10`
-        : `/Estoque/listar?page=${pagina}&size=10`;
+    const endpoint = termoBusca.trim()
+      ? `/Estoque/buscar?categoria=${encodeURIComponent(termoBusca)}&page=${pagina}&size=10`
+      : `/Estoque/listar?page=0&size=10`;
 
-        */
+    const response = await api.get(endpoint);
 
-         const endpoint = await fetch(
-          "https://sistema-estoque-8p4a.onrender.com/Estoque/listar?page=0&size=10"
-        );
+    const data = response.data.body;
 
-      const response = await api.get(endpoint);
+    console.log("Resposta do backend:", data);
+    console.log("Produtos:", data.content);
 
-      const data = response.data.body;
+    setProdutos(data.content || []);
+    setTotalDepaginas(data.totalPages || 0);
 
-      setProdutos(data.content || []);
-      setTotalDepaginas(data.totalPages || 0);
-    } catch (error) {
-      console.log("Erro ao carregar produtos", error);
-    }
-  };
-
+  } catch (error) {
+    console.error("Erro ao carregar produtos:", error);
+  }
+};
   useEffect(() => {
     carregarProdutos(paginaAtual, busca);
   }, [paginaAtual]);
