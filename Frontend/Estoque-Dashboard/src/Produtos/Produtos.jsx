@@ -59,7 +59,7 @@ export default function Produtos() {
     try {
       const endpoint = termoBusca.trim()
         ? `/Estoque/buscar?categoria=${termoBusca}&page=${pagina}&size=10`
-        : `/Estoque/listar?page=${pagina}&size=10`;
+        : `/Estoque/listar`;
 
       const response = await api.get(endpoint);
 
