@@ -17,7 +17,7 @@ export default function SideBar() {
         className="
           hidden
           md:flex
-          w-screen
+          w-64
           min-w-64
           h-screen
           bg-[#1D162C]
