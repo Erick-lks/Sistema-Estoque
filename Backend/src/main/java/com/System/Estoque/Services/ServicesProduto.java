@@ -1,6 +1,9 @@
 package com.System.Estoque.Services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -99,11 +102,37 @@ public class ServicesProduto {
 
   public ResponseEntity<?> removerProduto(@PathVariable Long id) {
 
-    Produto produto = repository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    Optional<Produto> produto = repository.findById(id);
 
-    repository.delete(produto);
+    if (produto.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
 
-    return ResponseEntity.noContent().build();
+    Produto produtoget = produto.get();
+
+    produtoget.setIsAtivo(false);
+    produtoget.setDataDeInativacao(LocalDate.now());
+
+    repository.save(produtoget);
+
+    return ResponseEntity.ok().build();
+  }
+  public ResponseEntity<?> restaurarProduto(@PathVariable Long id) {
+
+    Optional<Produto> produto = repository.findById(id);
+
+    if (produto.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
+
+    Produto produtoget = produto.get();
+
+    produtoget.setIsAtivo(true);
+    produtoget.setDataReativado(LocalDate.now());
+
+    repository.save(produtoget);
+
+    return ResponseEntity.ok().build();
   }
 
   public CardResponseDto findAllItens() {
