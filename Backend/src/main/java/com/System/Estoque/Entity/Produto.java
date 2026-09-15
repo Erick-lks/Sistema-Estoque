@@ -14,6 +14,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "tb_Produto")
@@ -29,7 +32,7 @@ public class Produto {
 
    
     @Column(name = "Produto")
-    private String produto;
+        private String produto;
 
     @Column(name = "Categoria")
     private String categoria;
@@ -37,5 +40,12 @@ public class Produto {
     @Column(name = "Quantidade")
     private Integer quantidade;
 
+    @Column(name = "Ativo")
+    private Boolean isAtivo = true;
+
+    @Column(name = "Reativado")
+    private LocalDate dataReativado;
+
+    private LocalDate dataDeInativacao;
     
 }
