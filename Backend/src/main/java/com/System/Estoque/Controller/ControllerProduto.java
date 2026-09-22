@@ -35,35 +35,35 @@ public class ControllerProduto {
         this.services = services;
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/Listar")
     public ResponseEntity<?> listarTodos(@PageableDefault(size = 10) Pageable pageable) {
         return ResponseEntity.ok(services.listarTodos(pageable));
     }
 
-    @GetMapping("/listar/{id}")
+    @GetMapping("/Listar/{id}")
     public ResponseEntity<?> listarporId(@PathVariable Long id) {
         return ResponseEntity.ok(services.listarporId(id));
     }
 
-    @GetMapping("/buscar")
+    @GetMapping("/Buscar")
     public ResponseEntity<?> buscarItem(@RequestParam String categoria, Pageable pageable) {
         return ResponseEntity.ok(services.buscandoItem(categoria, pageable));
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/Cadastrar")
     public ResponseEntity<?> adicionarProduto(@Valid @RequestBody ProdutoRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(services.cadastrarNovoProduto(dto));
     }
 
-    @PutMapping("/alterar/{id}")
+    @PutMapping("/Atualizar/{id}")
     public ResponseEntity<?> alterarProduto(@PathVariable Long id, @RequestBody ProdutoRequestDto dto) {
 
         return ResponseEntity.ok(services.aletrarproduto(id, dto));
 
     }
 
-    @DeleteMapping("/remover/{id}")
+    @DeleteMapping("/Remover/{id}")
     public ResponseEntity<?> removerProduto(@PathVariable Long id) {
 
         return ResponseEntity.ok(services.removerProduto(id));
@@ -74,13 +74,13 @@ public class ControllerProduto {
         return services;
     }
 
-    @GetMapping("/total")
+    @GetMapping("/Total")
     public ResponseEntity<CardResponseDto> getTotalItens() {
 
         return ResponseEntity.ok(services.findAllItens());
     }
 
-    @GetMapping("/baixo-estoque")
+    @GetMapping("/Baixo-estoque")
     public ResponseEntity<Page<ProdutoResponseDto>> baixoEstoque(
             Pageable pageable) {
 
