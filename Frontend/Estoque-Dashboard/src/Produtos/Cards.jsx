@@ -7,7 +7,7 @@ export default function Cards({
 }) {
   const filtrodeBaixoEstoque = async () => {
     try {
-      const response = await api.get("/Estoque/baixo-estoque?page=0&size=10");
+      const response = await api.get("/Estoque/Baixo-estoque?page=0&size=10");
 
       const data = response.data;
 
@@ -27,7 +27,7 @@ export default function Cards({
   useEffect(() => {
     async function cardsInformacao() {
       try {
-        const response = await api.get("/Estoque/total");
+        const response = await api.get("/Estoque/Total");
         setCards(response.data);
       } catch (error) {
         console.log("Erro de conexão ao Banco de Dados ", error);

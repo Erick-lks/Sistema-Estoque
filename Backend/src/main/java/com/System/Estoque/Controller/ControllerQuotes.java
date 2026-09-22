@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.System.Estoque.Services.QuoteService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/Api")
 @CrossOrigin(origins = "sistema-estoque-seven.vercel.app")
 public class ControllerQuotes {
 
@@ -18,7 +18,7 @@ public class ControllerQuotes {
         this.service = service;
     }
 
-    @GetMapping("/mensagem")
+    @GetMapping("/Mensagem")
     public Object mensagemObject() {
         return service.getRandomQuote();
     }
