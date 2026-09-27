@@ -1,6 +1,7 @@
 package com.System.Estoque.Services;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,9 +122,12 @@ return  ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(produto
 
       Produto produto = repository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
+      produto.setStatus(false);
+      produto.setDataExclusao(LocalDate.now());
+
    repository.delete(produto);
 
-   return ResponseEntity.noContent().build();
+      return ResponseEntity.ok().build();
   }
 
 
