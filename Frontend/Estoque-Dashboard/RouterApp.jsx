@@ -1,41 +1,69 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import App from "./src/App";
+
 import Produtos from "./src/Produtos/Produtos";
 import Vendas from "./src/Vendas/Vendas";
 import HomePage from "./src/HomePage/HomePage";
 import Relatorios from "./src/Relatorios/Relatorios";
 import Configuracao from "./src/Configuracao/Configuracao";
 import Usuarios from "./src/Usuarios/Usuarios";
+
 import LoginPage from "./src/LoginPage/PageLogin";
+import ProtectedRoute from "./src/LoginPage/ProtectedRoute";
 
 export default function RouterApp() {
   return (
-<BrowserRouter>
-
+    <BrowserRouter>
       <Routes>
 
-        {/* LOGIN */}
-        <Route path="/login" element={<LoginPage />} />
+     
 
-        {/* SISTEMA */}
-        <Route path="/" element={<App />}>
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
 
-          <Route index element={<HomePage />} />
 
-          <Route path="produtos" element={<Produtos />} />
+        <Route element={<ProtectedRoute />}>
 
-          <Route path="vendas" element={<Vendas />} />
+          <Route path="/" element={<App />}>
 
-          <Route path="relatorios" element={<Relatorios />} />
+            <Route
+              index
+              element={<HomePage />}
+            />
 
-          <Route path="usuarios" element={<Usuarios />} />
+            <Route
+              path="produtos"
+              element={<Produtos />}
+            />
 
-          <Route path="configuracao" element={<Configuracao />} />
+            <Route
+              path="vendas"
+              element={<Vendas />}
+            />
+
+            <Route
+              path="relatorios"
+              element={<Relatorios />}
+            />
+
+            <Route
+              path="usuarios"
+              element={<Usuarios />}
+            />
+
+            <Route
+              path="configuracao"
+              element={<Configuracao />}
+            />
+
+          </Route>
 
         </Route>
 
       </Routes>
-
     </BrowserRouter>
   );
 }

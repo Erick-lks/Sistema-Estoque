@@ -17,7 +17,7 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(
-                                "https://sistema-estoque-seven.vercel.app")
+                                "https://sistema-estoque-seven.vercel.app/login")
                         .allowedMethods(
                                 "GET",
                                 "POST",
