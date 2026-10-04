@@ -1,4 +1,9 @@
 package com.System.Estoque.Dtos.Response;
 
-public class LoginResponse {
+
+public record LoginResponse(
+        String token,
+        String nomeCompleto,
+        String perfil
+) {
 }

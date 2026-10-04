@@ -1,4 +1,6 @@
 package com.System.Estoque.Entity.Enum;
 
-public class Perfil {
+public enum Perfil {
+    ADMIN,
+    GERENTE
 }
