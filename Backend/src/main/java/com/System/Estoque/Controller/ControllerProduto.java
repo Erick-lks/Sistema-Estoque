@@ -5,16 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.System.Estoque.Dtos.CardResponseDto;
 import com.System.Estoque.Dtos.ProdutoRequestDto;
@@ -56,7 +47,7 @@ public class ControllerProduto {
                 .body(services.cadastrarNovoProduto(dto));
     }
 
-    @PutMapping("/Atualizar/{id}")
+    @PutMapping("/Alterar/{id}")
     public ResponseEntity<?> alterarProduto(@PathVariable Long id, @RequestBody ProdutoRequestDto dto) {
 
         return ResponseEntity.ok(services.aletrarproduto(id, dto));
@@ -69,6 +60,15 @@ public class ControllerProduto {
         return ResponseEntity.ok(services.removerProduto(id));
 
     }
+
+    @PatchMapping("/Restaurar/{id}")
+    public ResponseEntity<?> restaurarProduto(@PathVariable Long id) {
+
+        return ResponseEntity.ok(services.restaurarProduto(id));
+
+    }
+
+
 
     public ServicesProduto getServices() {
         return services;

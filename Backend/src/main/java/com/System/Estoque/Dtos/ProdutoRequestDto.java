@@ -22,5 +22,7 @@ public class ProdutoRequestDto {
 
     @Min(value = 0, message = "Quantidade não pode ser negativa")
     private Integer quantidade;
+
+
     
 }

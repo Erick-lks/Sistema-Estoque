@@ -41,14 +41,14 @@ public class SecurityConfig {
 
                         // Rotas públicas
                         .requestMatchers(
-                                "/auth/login"
+                                "/Auth/Login","/Auth/Registro"
 
                         ).permitAll()
 
                         // Somente ADMIN
 
                         .requestMatchers(
-                                "/auth/registro"
+                                "/Auth/Registro"
                         ).hasRole("ADMIN")
 
                         .requestMatchers(

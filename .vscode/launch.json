@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "EstoqueApplication",
+            "request": "launch",
+            "mainClass": "com.System.Estoque.EstoqueApplication"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-EstoqueApplication<Estoque>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

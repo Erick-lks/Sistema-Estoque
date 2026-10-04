@@ -23,6 +23,8 @@ public class AuthService {
     }
 
 
+
+
     public String login(UserDtoResponse dto){
         User user = repositoryUser.findByCpf(dto.cpf()).orElseThrow(() -> new RuntimeException("CPF não Encontrado!"));
 

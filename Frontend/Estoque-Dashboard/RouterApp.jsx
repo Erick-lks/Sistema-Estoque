@@ -5,19 +5,37 @@ import Vendas from "./src/Vendas/Vendas";
 import HomePage from "./src/HomePage/HomePage";
 import Relatorios from "./src/Relatorios/Relatorios";
 import Configuracao from "./src/Configuracao/Configuracao";
+import Usuarios from "./src/Usuarios/Usuarios";
+import LoginPage from "./src/LoginPage/PageLogin";
 
 export default function RouterApp() {
   return (
-    <BrowserRouter>
+<BrowserRouter>
+
       <Routes>
+
+        {/* LOGIN */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* SISTEMA */}
         <Route path="/" element={<App />}>
+
           <Route index element={<HomePage />} />
+
           <Route path="produtos" element={<Produtos />} />
+
           <Route path="vendas" element={<Vendas />} />
+
           <Route path="relatorios" element={<Relatorios />} />
+
+          <Route path="usuarios" element={<Usuarios />} />
+
           <Route path="configuracao" element={<Configuracao />} />
+
         </Route>
+
       </Routes>
+
     </BrowserRouter>
   );
 }

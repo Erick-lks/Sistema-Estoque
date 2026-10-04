@@ -8,17 +8,20 @@ export default function SideBar() {
     { to: "/produtos", label: "Produtos", icon: "📦" },
     { to: "/vendas", label: "Vendas", icon: "💰" },
     { to: "/relatorios", label: "Relatórios", icon: "📊" },
+      { to: "/usuarios", label: "Usuários", icon: "👤" },
+
     { to: "/configuracao", label: "Configuração", icon: "⚙️" },
   ];
 
   return (
     <>
+     
       <aside
         className="
           hidden
-          lg:flex
-          w-84
-          min-w-84
+          md:flex
+          w-64
+          min-w-64
           h-screen
           bg-[#1D162C]
           text-white
@@ -28,11 +31,12 @@ export default function SideBar() {
           shrink-0
         "
       >
+        
         <div className="flex items-center gap-4">
           <img
             className="w-16 h-16 rounded-full object-cover"
             src={logoloja}
-            alt="Logo HardwareStore"
+            alt="Logo"
           />
 
           <div>
@@ -53,38 +57,34 @@ export default function SideBar() {
               to={link.to}
               className={({ isActive }) =>
                 `
-                  flex
-                  items-center
-                  gap-3
-                  p-2
-                  rounded-lg
-                  transition-all
-                  duration-200
-                  hover:bg-white/10
-                  hover:text-gray-300
-                  ${
-                    isActive
-                      ? "text-[#AD65BD] bg-white/10 font-semibold"
-                      : "text-white"
-                  }
+                flex
+                items-center
+                gap-3
+                p-2
+                rounded-lg
+                transition-all
+                duration-200
+                hover:bg-white/10
+                hover:text-gray-300
+                ${
+                  isActive
+                    ? "text-[#AD65BD] bg-white/10 font-semibold"
+                    : "text-white"
+                }
                 `
               }
             >
-              <span className="text-lg">
-                {link.icon}
-              </span>
-
-              <span>
-                {link.label}
-              </span>
+              <span>{link.icon}</span>
+              <span>{link.label}</span>
             </NavLink>
           ))}
         </nav>
       </aside>
 
+      
       <header
         className="
-          lg:hidden
+          md:hidden
           fixed
           top-0
           left-0
@@ -101,7 +101,7 @@ export default function SideBar() {
       >
         <img
           src={logoloja}
-          alt="Logo HardwareStore"
+          alt="Logo"
           className="w-10 h-10 rounded-full object-cover"
         />
 
@@ -116,9 +116,10 @@ export default function SideBar() {
         </div>
       </header>
 
+     
       <nav
         className="
-          lg:hidden
+          md:hidden
           fixed
           bottom-0
           left-0
@@ -139,18 +140,18 @@ export default function SideBar() {
             to={link.to}
             className={({ isActive }) =>
               `
-                flex
-                flex-col
-                items-center
-                justify-center
-                text-[11px]
-                gap-1
-                transition
-                ${
-                  isActive
-                    ? "text-[#AD65BD] font-semibold"
-                    : "text-gray-300"
-                }
+              flex
+              flex-col
+              items-center
+              justify-center
+              text-[11px]
+              gap-1
+              transition
+              ${
+                isActive
+                  ? "text-[#AD65BD] font-semibold"
+                  : "text-gray-300"
+              }
               `
             }
           >
@@ -169,4 +170,3 @@ export default function SideBar() {
     </>
   );
 }
-

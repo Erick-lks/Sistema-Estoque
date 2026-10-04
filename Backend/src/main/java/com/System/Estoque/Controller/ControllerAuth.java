@@ -34,6 +34,8 @@ public class ControllerAuth {
         this.authService = authService;
     }
 
+    private static final String SENHA_PADRAO = "estoqueTest";
+
 
 
     @PostMapping("/Registro")
@@ -47,7 +49,7 @@ public class ControllerAuth {
         User usernew = new User();
         usernew.setNomeCompleto(dto.getNomeCompleto());
         usernew.setCpf(dto.getCpf());
-        usernew.setPassword(passwordEncoder.encode(dto.getPassword()));
+            usernew.setPassword(passwordEncoder.encode(SENHA_PADRAO));
         usernew.setPerfil(dto.getPerfil());
 
            repositoryUser.save(usernew);

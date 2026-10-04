@@ -2,8 +2,8 @@ package com.System.Estoque.Dtos;
 
 import lombok.Getter;
 
-import javax.swing.text.StyledEditorKit;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 
@@ -16,17 +16,24 @@ public class ProdutoResponseDto {
     private Boolean status;
     private LocalDate dataExclusao;
 
+    private Boolean isActive;
+    private LocalDate dataDeInativacao;
+
+    private LocalDate dataReativado;
 
 
-    public ProdutoResponseDto(Long id , String produto , String categoria , Integer quantidade
-    ,Boolean status , LocalDate dataExclusao){
+
+    public ProdutoResponseDto(Long id , String produto , String categoria , Integer quantidade, Boolean isActive , LocalDate dataDeInativacao , LocalDate dataReativado){
         this.id=id;
            this.produto=produto;
         this.categoria=categoria;
      
         this.quantidade=quantidade;
-this .status = status;
-this.dataExclusao=dataExclusao;
+        this.isActive = isActive;
+        this.dataDeInativacao = dataDeInativacao;
+        this.dataReativado=dataReativado;
+
+
     }
     
 }
