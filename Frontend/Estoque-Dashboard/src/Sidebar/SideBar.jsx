@@ -7,6 +7,8 @@ export default function SideBar() {
     { to: "/produtos", label: "Produtos", icon: "📦" },
     { to: "/vendas", label: "Vendas", icon: "💰" },
     { to: "/relatorios", label: "Relatórios", icon: "📊" },
+      { to: "/usuarios", label: "Usuários", icon: "👤" },
+
     { to: "/configuracao", label: "Configuração", icon: "⚙️" },
   ];
 
