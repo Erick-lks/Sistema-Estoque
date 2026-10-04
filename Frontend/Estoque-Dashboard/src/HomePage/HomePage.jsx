@@ -41,7 +41,7 @@ export default function HomePage() {
     try {
       setLoading(true);
 
-      const response = await api.get("/api/mensagem");
+      const response = await api.get("/Api/Mensagem");
 
       const data = response.data;
 
@@ -66,7 +66,7 @@ export default function HomePage() {
   useEffect(() => {
     async function cardsInformacao() {
       try {
-        const response = await api.get("Estoque/total");
+        const response = await api.get("/Estoque/Total");
         console.log("Dados dos Cards ", response.data);
         setCards(response.data);
       } catch (error) {

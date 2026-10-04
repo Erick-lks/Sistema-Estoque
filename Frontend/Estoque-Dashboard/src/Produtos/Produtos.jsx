@@ -45,7 +45,7 @@ export default function Produtos() {
     id: "",
     produto: "",
     categoria: "",
-    quantidade: "0",
+    quantidade: " ",
   });
 
   const fecharModal = () => {
@@ -59,8 +59,8 @@ const carregarProdutos = async (pagina = 0, termoBusca = "") => {
   try {
 
     const endpoint = termoBusca.trim()
-      ? `/Estoque/buscar?categoria=${encodeURIComponent(termoBusca)}&page=${pagina}&size=10`
-      : `/Estoque/listar?page=0&size=10`;
+      ? `/Estoque/Buscar?categoria=${encodeURIComponent(termoBusca)}&page=${pagina}&size=10`
+      : `/Estoque/Listar?page=0&size=10`;
 
     const response = await api.get(endpoint);
 
@@ -81,7 +81,7 @@ const carregarProdutos = async (pagina = 0, termoBusca = "") => {
   }, [paginaAtual]);
   async function salvarProduto() {
     try {
-      const response = await api.post("/Estoque/cadastrar", {
+      const response = await api.post("/Estoque/Cadastrar", {
         ...form,
         quantidade: Number(form.quantidade),
       });
@@ -100,7 +100,7 @@ const carregarProdutos = async (pagina = 0, termoBusca = "") => {
   }, [busca]);
   async function atualizarProduto() {
     try {
-      const response = await api.put(`/Estoque/alterar/${idEditando}`, form);
+      const response = await api.put(`/Estoque/Atualizar/${idEditando}`, form);
       console.log("Produto Atualizado", response.data);
 
       fecharModal();
@@ -130,7 +130,7 @@ const carregarProdutos = async (pagina = 0, termoBusca = "") => {
       );
       if (!confirmacao) return;
 
-      await api.delete(`/Estoque/remover/${id}`);
+      await api.delete(`/Estoque/Remover/${id}`);
 
       setProdutos(produtos.filter((p) => p.id !== id));
 
