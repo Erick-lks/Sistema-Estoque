@@ -22,11 +22,12 @@ export default function LoginPage() {
 
       localStorage.setItem("token", token);
 
-      console.log("Login realizado");
+      console.log("Login realizado com sucesso");
 
-      navigate("/");
+    navigate("/", { replace: true });
     } catch (error) {
-      console.error(error);
+      console.error("Erro no login:", error);
+
       alert("Falha no Login, tente novamente!");
     }
   }

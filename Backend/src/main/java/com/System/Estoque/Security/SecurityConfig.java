@@ -41,7 +41,7 @@ public class SecurityConfig {
 
                         // Rotas públicas
                         .requestMatchers(
-                                "/Auth/Login","/Auth/Registro"
+                                "/Auth/Login"
 
                         ).permitAll()
 

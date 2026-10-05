@@ -1,6 +1,5 @@
 package com.System.Estoque.Security;
 
-
 import com.System.Estoque.Entity.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -14,16 +13,15 @@ public class JwtService {
 
     private final Algorithm algorithm;
 
-
-    public JwtService(@Value("${api.security.token.secret}") String secret) {
+    public JwtService(
+            @Value("${api.security.token.secret}") String secret
+    ) {
         this.algorithm = Algorithm.HMAC256(secret);
     }
 
-
-    public String  gerarToken(User user) {
+    public String gerarToken(User user) {
 
         Instant agora = Instant.now();
-
 
         return JWT.create()
                 .withIssuer("sistema-estoque")
@@ -34,7 +32,7 @@ public class JwtService {
                 .sign(algorithm);
     }
 
-    public  String validadorToken(String token){
+    public String validarToken(String token) {
 
         try {
             return JWT.require(algorithm)
@@ -42,7 +40,8 @@ public class JwtService {
                     .build()
                     .verify(token)
                     .getSubject();
-        }catch (Exception e){
+
+        } catch (Exception e) {
             return null;
         }
     }

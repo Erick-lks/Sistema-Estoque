@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = authorization.substring(7);
 
-        String cpf = jwtService.validadorToken(token);
+        String cpf = jwtService.validarToken(token);
 
         if (cpf != null) {
 
