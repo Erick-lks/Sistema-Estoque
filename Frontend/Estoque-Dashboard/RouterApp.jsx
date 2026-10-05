@@ -1,7 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
 import App from "./src/App";
-
 import Produtos from "./src/Produtos/Produtos";
 import Vendas from "./src/Vendas/Vendas";
 import HomePage from "./src/HomePage/HomePage";
@@ -14,56 +17,37 @@ import ProtectedRoute from "./src/LoginPage/ProtectedRoute";
 
 export default function RouterApp() {
   return (
-    <BrowserRouter>
-      <Routes>
+      <BrowserRouter>
+        <Routes>
 
-     
+          {/* ROTA PÚBLICA - LOGIN */}
+          <Route path="/login" element={<LoginPage />} />
 
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
+          {/* ROTAS PROTEGIDAS */}
+          <Route element={<ProtectedRoute />}>
+
+            <Route path="/" element={<App />}>
+
+              <Route index element={<HomePage />} />
+
+              <Route path="produtos" element={<Produtos />} />
+
+              <Route path="vendas" element={<Vendas />} />
+
+              <Route path="relatorios" element={<Relatorios />} />
+
+              <Route path="usuarios" element={<Usuarios />} />
+
+              <Route path="configuracao" element={<Configuracao />} />
+
+            </Route>
 
 
-        <Route element={<ProtectedRoute />}>
-
-          <Route path="/" element={<App />}>
-
-            <Route
-              index
-              element={<HomePage />}
-            />
-
-            <Route
-              path="produtos"
-              element={<Produtos />}
-            />
-
-            <Route
-              path="vendas"
-              element={<Vendas />}
-            />
-
-            <Route
-              path="relatorios"
-              element={<Relatorios />}
-            />
-
-            <Route
-              path="usuarios"
-              element={<Usuarios />}
-            />
-
-            <Route
-              path="configuracao"
-              element={<Configuracao />}
-            />
 
           </Route>
+                    <Route path="*" element={<Navigate to="/login" replace />} />
 
-        </Route>
-
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
   );
 }

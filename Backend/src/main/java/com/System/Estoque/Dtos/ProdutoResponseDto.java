@@ -13,6 +13,8 @@ public class ProdutoResponseDto {
     private String produto;
     private String categoria;
     private Integer quantidade;
+    private Boolean status;
+    private LocalDate dataExclusao;
 
     private Boolean isActive;
     private LocalDate dataDeInativacao;

@@ -14,11 +14,6 @@ public interface RepositoryProduto extends JpaRepository<Produto, Long>{
 Page<Produto> findByQuantidadeLessThan(Integer quantidade, Pageable pageable);
 
 
-    
 
-    Page<Produto> findByQuantidadeLessThanEqual(
-        Integer quantidade,
-        Pageable pageable
-    );
 
 }

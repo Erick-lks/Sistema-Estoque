@@ -1,5 +1,6 @@
 # Ignorar o arquivo de configuração do Spring
 application.properties
+.script-banco
 
 /src/main/resources/
 
