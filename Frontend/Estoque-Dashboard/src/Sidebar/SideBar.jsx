@@ -20,13 +20,13 @@ export default function SideBar() {
         className="
           hidden
           md:flex
-          w-64
+          w-90
           min-w-64
           h-screen
           bg-[#1D162C]
           text-white
           flex-col
-          p-6
+          p-8
           gap-6
           shrink-0
         "
@@ -34,7 +34,7 @@ export default function SideBar() {
         
         <div className="flex items-center gap-4">
           <img
-            className="w-16 h-16 rounded-full object-cover"
+            className="w-30 h-30 rounded-full object-cover"
             src={logoloja}
             alt="Logo"
           />

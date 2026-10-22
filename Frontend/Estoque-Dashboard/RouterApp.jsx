@@ -14,6 +14,7 @@ import Usuarios from "./src/Usuarios/Usuarios";
 
 import LoginPage from "./src/LoginPage/PageLogin";
 import ProtectedRoute from "./src/LoginPage/ProtectedRoute";
+import VendasTest from "./src/Vendas/VendasTest";
 
 export default function RouterApp() {
   return (
@@ -32,7 +33,7 @@ export default function RouterApp() {
 
               <Route path="produtos" element={<Produtos />} />
 
-              <Route path="vendas" element={<Vendas />} />
+              <Route path="vendas" element={<VendasTest />} />
 
               <Route path="relatorios" element={<Relatorios />} />
 
