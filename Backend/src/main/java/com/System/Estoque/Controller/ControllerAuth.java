@@ -6,7 +6,9 @@ import com.System.Estoque.Dtos.Response.UserDtoResponse;
 import com.System.Estoque.Entity.User;
 import com.System.Estoque.Repository.RepositoryUser;
 import com.System.Estoque.Services.AuthService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -49,23 +51,42 @@ public class ControllerAuth {
     }
 
     @PostMapping("/Login")
-    public ResponseEntity<?> login(@RequestBody UserDtoResponse response) {
+    public ResponseEntity<?> login(
+            @RequestBody UserDtoResponse response) {
 
         try {
             String token = authService.login(response);
 
-            User user = repositoryUser.findByCpf(response.cpf()).orElseThrow();
+            User user = repositoryUser
+                    .findByCpf(response.cpf())
+                    .orElseThrow();
+
+            ResponseCookie jwtCookie = ResponseCookie
+                    .from("auth_token", token)
+                    .httpOnly(true)
+                    .secure(true)
+                    .path("/")
+                    .maxAge(2 * 60 * 60)
+                    .sameSite("None")
+                    .build();
 
             LoginResponse loginResponse = new LoginResponse(
-                    token,
                     user.getNomeCompleto(),
-                    user.getPerfil().name());
+                    user.getPerfil().name()
 
-            return ResponseEntity.ok(loginResponse);
+            );
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                    .body("Login realizado com sucesso!");
+
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("CPF ou Senha Invalidos");
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body("CPF ou senha inválidos");
         }
+    }
+
 
     }
-}
+
