@@ -6,12 +6,16 @@ import com.System.Estoque.Dtos.Response.UserDtoResponse;
 import com.System.Estoque.Entity.User;
 import com.System.Estoque.Repository.RepositoryUser;
 import com.System.Estoque.Services.AuthService;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Duration;
 
 @RestController
 @RequestMapping("/Auth")
@@ -20,13 +24,18 @@ public class ControllerAuth {
     private final PasswordEncoder passwordEncoder;
     private final AuthService authService;
 
+    @Value("${app.cookie.secure:true}")
+    private boolean cookieSecure;
+
     public ControllerAuth(
             RepositoryUser repositoryUser,
             PasswordEncoder passwordEncoder,
-            AuthService authService) {
+            AuthService authService
+            ) {
         this.repositoryUser = repositoryUser;
         this.passwordEncoder = passwordEncoder;
         this.authService = authService;
+        
     }
 
     private static final String SENHA_PADRAO = "estoqueTest";
@@ -51,9 +60,7 @@ public class ControllerAuth {
     }
 
     @PostMapping("/Login")
-    public ResponseEntity<?> login(
-            @RequestBody UserDtoResponse response) {
-
+    public ResponseEntity<?> login(@RequestBody UserDtoResponse response) {
         try {
             String token = authService.login(response);
 
@@ -64,21 +71,20 @@ public class ControllerAuth {
             ResponseCookie jwtCookie = ResponseCookie
                     .from("auth_token", token)
                     .httpOnly(true)
-                    .secure(true)
+                    .secure(cookieSecure)
                     .path("/")
-                    .maxAge(2 * 60 * 60)
+                    .maxAge(Duration.ofHours(2))
                     .sameSite("None")
                     .build();
 
             LoginResponse loginResponse = new LoginResponse(
                     user.getNomeCompleto(),
                     user.getPerfil().name()
-
             );
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                    .body("Login realizado com sucesso!");
+                    .body(loginResponse);
 
         } catch (RuntimeException e) {
             return ResponseEntity
