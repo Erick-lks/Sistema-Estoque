@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8c8416fe-7b77-4532-b8a7-b5a544cc7982" name="Changes" comment="" />
+    <list default="true" id="8c8416fe-7b77-4532-b8a7-b5a544cc7982" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Frontend/Estoque-Dashboard/src/Services/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Estoque-Dashboard/src/Services/Api.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,6 +12,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Erick-lks"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Erick-lks/Sistema-Estoque.git",
+    "accountId": "d71f68fb-58b6-4a83-b3eb-ccc382b384cb"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4,
   &quot;fromUser&quot;: false
@@ -29,6 +43,8 @@
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "A:/Projetos/Sistema Estoque Portifolio",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
   }
 }]]></component>
