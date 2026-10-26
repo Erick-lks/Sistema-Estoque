@@ -1,6 +1,6 @@
 import TelaDefault from "../Default/TelaDefault";
-import VendasTest from "./VendasTest";
+import VendasModules from "./VendasModules";
 
 export default function Vendas() {
-  return <VendasTest />;
+  return <VendasModules />;
 }

@@ -40,12 +40,11 @@ public class Produto {
     @Column(name = "Quantidade")
     private Integer quantidade;
 
-    @Column(name = "Ativo")
-    private Boolean isAtivo = true;
+    @Column(nullable = false)
+    private Boolean isActive = true;
 
     @Column(name = "Reativado")
     private LocalDate dataReativado;
 
-    private LocalDate dataDeInativacao;
     
 }

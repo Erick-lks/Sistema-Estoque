@@ -4,16 +4,6 @@ import api from "../Services/Api";
 export default function Relatorios() {
 
 
-
-   
-
-
-
-
-
-
-
-
   const baixarRelatorio = async () => {
     try {
       const response = await api.get("/Estoque/Relatorio", {

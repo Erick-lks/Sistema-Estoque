@@ -33,7 +33,7 @@ public class ProdutoServices {
   public ResponseEntity<Page<DtoResponseProduto>> listarTodos(
       Pageable pageable) {
 
-    Page<Produto> produto = repository.findAll(pageable);
+    Page<Produto> produto = repository.findByIsActiveTrue(pageable);
 
     if (produto.isEmpty()) {
       throw new NenhumProdutoEncontradoExecption("Nenhum produto encontrado!");
@@ -114,13 +114,14 @@ public class ProdutoServices {
     Optional<Produto> produto = repository.findById(id);
 
     if (produto.isEmpty()) {
-      return ResponseEntity.notFound().build();
+      throw new NenhumProdutoEncontradoExecption(
+              "Nenhum produto para Remover!"
+      );
     }
 
     Produto produtoget = produto.get();
 
-    produtoget.setIsAtivo(false);
-    produtoget.setDataDeInativacao(LocalDate.now());
+    produtoget.setIsActive(false);
 
     repository.save(produtoget);
 
@@ -136,7 +137,7 @@ public class ProdutoServices {
 
     Produto produtoget = produto.get();
 
-    produtoget.setIsAtivo(true);
+    produtoget.setIsActive(true);
     produtoget.setDataReativado(LocalDate.now());
 
     repository.save(produtoget);
@@ -146,16 +147,21 @@ public class ProdutoServices {
 
   public DtoResponseCard findAllItens() {
 
-    List<Produto> produtos = repository.findAll();
 
+    List<Produto> produtos = repository.findByIsActiveTrue();
+
+    if (produtos.isEmpty()){
+      throw  new NenhumProdutoEncontradoExecption("Nenhum Card de Produto Disponivel!");
+    }
     int totalItens = produtos.stream()
-        .mapToInt(Produto::getQuantidade)
-        .sum();
+            .filter(p -> Boolean.TRUE.equals(p.getIsActive()))
+            .mapToInt(Produto::getQuantidade)
+            .sum();
 
     long baixoEstoque = produtos.stream()
-        .filter(p -> p.getQuantidade() < 15)
-        .count();
-
+            .filter(p -> p.getQuantidade() < 15
+                    && Boolean.TRUE.equals(p.getIsActive()))
+            .count();
     int produtosTotal = produtos.size();
 
     return new DtoResponseCard(

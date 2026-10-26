@@ -23,6 +23,7 @@ export default function Cards({
     totalItens: 0,
     baixoEstoque: 0,
     produtosTotal: 0,
+    inativos: 0,
   });
   useEffect(() => {
     async function cardsInformacao() {
@@ -59,6 +60,8 @@ export default function Cards({
         <h3 className="text-black">total de produtos</h3>
         <p className="text-3xl font-bold mt-2 ">{cards?.produtosTotal ?? 0}</p>
       </div>
+
+      
     </div>
   );
 }

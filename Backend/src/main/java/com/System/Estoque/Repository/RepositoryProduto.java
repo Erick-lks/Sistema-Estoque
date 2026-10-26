@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.System.Estoque.Entity.Produto;
 
+import java.util.List;
+
 public interface RepositoryProduto extends JpaRepository<Produto, Long>{
     Page<Produto> findByCategoriaContainingIgnoreCase(
         String categoria,
@@ -13,6 +15,8 @@ public interface RepositoryProduto extends JpaRepository<Produto, Long>{
 );
 Page<Produto> findByQuantidadeLessThan(Integer quantidade, Pageable pageable);
 
+    Page<Produto> findByIsActiveTrue(Pageable pageable);
+    List<Produto> findByIsActiveTrue();
 
 
 

@@ -67,7 +67,7 @@ const carregarProdutos = async (pagina = 0, termoBusca = "") => {
     const data = response.data.body;
 
     console.log("Resposta do backend:", data);
-    console.log("Produtos:", data.content);
+   console.log("Produtos:", data.content);
 
     setProdutos(data.content || []);
     setTotalDepaginas(data.totalPages || 0);
@@ -95,12 +95,12 @@ const carregarProdutos = async (pagina = 0, termoBusca = "") => {
   }
 
   useEffect(() => {
-    console.log("Buscando:", busca);
+   // console.log("Buscando:", busca);
     carregarProdutos(0, busca);
   }, [busca]);
   async function atualizarProduto() {
     try {
-      const response = await api.put(`/Estoque/Atualizar/${idEditando}`, form);
+      const response = await api.put(`/Estoque/Alterar/${idEditando}`, form);
       console.log("Produto Atualizado", response.data);
 
       fecharModal();
@@ -130,15 +130,18 @@ const carregarProdutos = async (pagina = 0, termoBusca = "") => {
       );
       if (!confirmacao) return;
 
-      await api.delete(`/Estoque/Remover/${id}`);
+      await api.patch(`/Estoque/Remover/${id}`);
 
       setProdutos(produtos.filter((p) => p.id !== id));
 
       alert("Produto excluído com sucesso!");
+       carregarProdutos(paginaAtual, busca);
     } catch (error) {
       console.error("Erro ao excluir produto:", error);
       alert("Não foi possível excluir o produto.");
     }
+
+   
   }
 
   return (
@@ -244,6 +247,7 @@ const carregarProdutos = async (pagina = 0, termoBusca = "") => {
           carregarProdutos={carregarProdutos}
           setProdutos={setProdutos}
           setTotalDepaginas={setTotalDepaginas}
+          
         />
         <div className="bg-white mt-6 p-4 rounded-2xl shadow">
           <div className="overflow-x-auto">

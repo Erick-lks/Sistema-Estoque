@@ -29,7 +29,7 @@ public class ControllerProduto {
         this.services = services;
     }
 
-    @GetMapping("/Listar")
+        @GetMapping("/Listar")
     public ResponseEntity<?> listarTodos(@PageableDefault(size = 10) Pageable pageable) {
         return ResponseEntity.ok(services.listarTodos(pageable));
     }
@@ -57,7 +57,7 @@ public class ControllerProduto {
 
     }
 
-    @DeleteMapping("/Remover/{id}")
+    @PatchMapping("/Remover/{id}")
     public ResponseEntity<?> removerProduto(@PathVariable Long id) {
 
         return ResponseEntity.ok(services.removerProduto(id));

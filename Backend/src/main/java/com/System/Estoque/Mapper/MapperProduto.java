@@ -26,8 +26,7 @@ public class MapperProduto {
         entity.getProduto(),
         entity.getCategoria(),
         entity.getQuantidade(),
-                  entity.getIsAtivo(),
-                  entity.getDataDeInativacao(),
+                  entity.getIsActive(),
                   entity.getDataReativado()
 
     );

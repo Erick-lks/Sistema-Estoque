@@ -67,7 +67,7 @@ public class VendaService {
         List<VendaDiaria> vendasDiarias = repositoryDiario.findAll();
 
         if (vendasDiarias.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            throw  new NenhumaVendaException("Sem Vendas por Dia disponivel");
         }
 
         List<DtoResponseVendaDiaria> response = vendasDiarias.stream()

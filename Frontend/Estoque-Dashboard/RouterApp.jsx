@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import App from "./src/App";
 import Produtos from "./src/Produtos/Produtos";
-import Vendas from "./src/Vendas/Vendas";
 import HomePage from "./src/HomePage/HomePage";
 import Relatorios from "./src/Relatorios/Relatorios";
 import Configuracao from "./src/Configuracao/Configuracao";
@@ -14,7 +13,7 @@ import Usuarios from "./src/Usuarios/Usuarios";
 
 import LoginPage from "./src/LoginPage/PageLogin";
 import ProtectedRoute from "./src/LoginPage/ProtectedRoute";
-import VendasTest from "./src/Vendas/VendasTest";
+import VendasModules from "./src/Vendas/VendasModules";
 
 export default function RouterApp() {
   return (
@@ -33,7 +32,7 @@ export default function RouterApp() {
 
               <Route path="produtos" element={<Produtos />} />
 
-              <Route path="vendas" element={<VendasTest />} />
+              <Route path="vendas" element={<VendasModules />} />
 
               <Route path="relatorios" element={<Relatorios />} />
 

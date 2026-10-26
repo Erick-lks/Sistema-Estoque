@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../Services/Api";
 
-export default function VendasTest() {
-  const [vendas, setVendas] = useState([]);
+export default function VendasModules() {
+   const [vendas, setVendas] = useState([]);
   const [vendasDiarias, setVendasDiarias] = useState([]);
   const [mostrarModal, setMostrarModal] = useState(false);
   const [carregando, setCarregando] = useState(false);
@@ -36,22 +36,22 @@ function visualizarVendaDiaria(vendaDiaria) {
 }
 
 
-  async function listarVendas() {
-    try {
-      const response = await api.get("/Vendas/listarVendas");
+async function listarVendas() {
+try {
+const response = await api.get("/Vendas/Listar");
 
-      if (response.status === 204 || !response.data) {
-        setVendas([]);
-        return;
-      }
+if (response.status === 204 || !response.data) {
+  setVendas([]);
+  return;
+}
 
-      setVendas(response.data);
-    } catch (error) {
-      console.error("Erro ao listar vendas:", error);
-      alert("Erro ao carregar as vendas.");
-    }
-  }
+setVendas(Array.isArray(response.data) ? response.data : []);
 
+} catch (error) {
+console.error("Erro ao listar vendas:", error);
+alert("Erro ao carregar as vendas.");
+}
+}
   async function listarVendasDiarias() {
     try {
       const response = await api.get(
@@ -118,7 +118,7 @@ function visualizarVendaDiaria(vendaDiaria) {
       setCarregando(true);
 
       await api.post(
-        "/Vendas/cadastrarVenda",
+        "/Vendas/Cadastrar",
         dadosVenda
       );
 
@@ -144,7 +144,7 @@ function visualizarVendaDiaria(vendaDiaria) {
       setCarregando(false);
     }
   }
-
+/*
   async function excluirVenda(id) {
     const confirmar = window.confirm(
       "Deseja realmente excluir esta venda?"
@@ -173,70 +173,7 @@ function visualizarVendaDiaria(vendaDiaria) {
       setCarregando(false);
     }
   }
-
-  async function fecharDia() {
-    if (vendas.length === 0) {
-      alert("Não existem vendas para fechar.");
-      return;
-    }
-
-    const confirmar = window.confirm(
-      "Deseja fechar o dia? Todas as vendas pendentes serão agrupadas."
-    );
-
-    if (!confirmar) return;
-
-    try {
-      setCarregando(true);
-
-      await api.post("/Vendas/diaria");
-
-      alert("Dia fechado com sucesso!");
-       setVendas([]);
-
-      await listarVendas();
-      
-      await listarVendasDiarias();
-    } catch (error) {
-      console.error(
-        "Erro ao fechar dia:",
-        error
-      );
-
-      alert(
-        error.response?.data?.message ||
-          "Erro ao fechar o dia."
-      );
-    } finally {
-      setCarregando(false);
-    }
-  }
-
-async function alterarVenda() {
-  try {
-    const dados = {
-      quantidadeVendida: Number(form.quantidadeVendida),
-      plataforma: form.plataforma,
-      valorTotal: Number(form.valorTotal)
-    };
-
-    const response = await api.put(
-      `/Vendas/alterarVenda/${vendaEditando.id}`,
-      dados
-    );
-
-    console.log("Venda atualizada:", response.data);
-
-    fecharModal();
-
-    await listarVendas();
-
-    alert("Venda atualizada com sucesso!");
-  } catch (error) {
-    console.error("Erro:", error);
-    console.error("Resposta:", error.response?.data);
-  }
-}
+*/
   const totalVendas = vendas.length;
 
   const itensVendidos = vendas.reduce(
@@ -262,7 +199,7 @@ async function alterarVenda() {
       valorTotal: 0,
     });
   }
-
+/*
 
   async function excluirVendaDiaria(id) {
     const confirmar = window.confirm(
@@ -292,7 +229,7 @@ async function alterarVenda() {
       setCarregando(false);
     }
   }
-
+*/
 
   return (
     <div className="p-6">
@@ -312,7 +249,7 @@ async function alterarVenda() {
         <div className="flex gap-3">
 
           <button
-            onClick={fecharDia}
+            onClick={"fecha"}
             disabled={
               carregando ||
               vendas.length === 0
@@ -649,17 +586,15 @@ onClick={() => editarVenda(venda)}                            className="bg-cyan
                 Selecione uma plataforma
               </option>
 
-              <option value="NOVE_NOVE_FOOD">
-                99 Food
+              <option value="WEBSITE">
+                Website
               </option>
 
-                <option value="IFOOD">
-                Ifood
+                <option value="VENDA_DIRETA">
+                Venda em loja
               </option>
 
-  <option value="VENDA_DIRETA">
-                Venda Direta
-              </option>
+  
             </select>
 
             <label className="block mb-2 font-semibold">

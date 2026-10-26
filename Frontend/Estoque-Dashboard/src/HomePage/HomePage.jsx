@@ -67,7 +67,7 @@ export default function HomePage() {
     async function cardsInformacao() {
       try {
         const response = await api.get("/Estoque/Total");
-        console.log("Dados dos Cards ", response.data);
+      //    console.log("Dados dos Cards ", response.data);
         setCards(response.data);
       } catch (error) {
         console.log("Erro de conexão ao Banco de Dados ", error);
