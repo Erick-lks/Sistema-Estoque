@@ -5,24 +5,27 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.System.Estoque.Dtos.CardResponseDto;
-import com.System.Estoque.Dtos.ProdutoRequestDto;
-import com.System.Estoque.Dtos.ProdutoResponseDto;
-import com.System.Estoque.Services.ServicesProduto;
+import com.System.Estoque.Dto.Response.DtoResponseCard;
+import com.System.Estoque.Dto.Request.DtoRequestProduto;
+import com.System.Estoque.Dto.Response.DtoResponseProduto;
+import com.System.Estoque.Service.ProdutoServices;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/Estoque")
 @CrossOrigin(origins = "sistema-estoque-seven.vercel.app")
+@PreAuthorize("hasAnyRole('ADMIN', 'GERENTE')")
+
 
 public class ControllerProduto {
 
-    private final ServicesProduto services;
+    private final ProdutoServices services;
 
-    ControllerProduto(ServicesProduto services) {
+    ControllerProduto(ProdutoServices services) {
         this.services = services;
     }
 
@@ -42,13 +45,13 @@ public class ControllerProduto {
     }
 
     @PostMapping("/Cadastrar")
-    public ResponseEntity<?> adicionarProduto(@Valid @RequestBody ProdutoRequestDto dto) {
+    public ResponseEntity<?> adicionarProduto(@Valid @RequestBody DtoRequestProduto dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(services.cadastrarNovoProduto(dto));
     }
 
     @PutMapping("/Alterar/{id}")
-    public ResponseEntity<?> alterarProduto(@PathVariable Long id, @RequestBody ProdutoRequestDto dto) {
+    public ResponseEntity<?> alterarProduto(@PathVariable Long id, @RequestBody DtoRequestProduto dto) {
 
         return ResponseEntity.ok(services.aletrarproduto(id, dto));
 
@@ -70,18 +73,18 @@ public class ControllerProduto {
 
 
 
-    public ServicesProduto getServices() {
+    public ProdutoServices getServices() {
         return services;
     }
 
     @GetMapping("/Total")
-    public ResponseEntity<CardResponseDto> getTotalItens() {
+    public ResponseEntity<DtoResponseCard> getTotalItens() {
 
         return ResponseEntity.ok(services.findAllItens());
     }
 
     @GetMapping("/Baixo-estoque")
-    public ResponseEntity<Page<ProdutoResponseDto>> baixoEstoque(
+    public ResponseEntity<Page<DtoResponseProduto>> baixoEstoque(
             Pageable pageable) {
 
         return services.baixoEstoque(pageable);

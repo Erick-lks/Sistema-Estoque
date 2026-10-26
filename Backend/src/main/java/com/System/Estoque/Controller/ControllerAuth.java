@@ -1,11 +1,11 @@
 package com.System.Estoque.Controller;
 
-import com.System.Estoque.Dtos.Request.UserDtoRegisterRequest;
-import com.System.Estoque.Dtos.Response.LoginResponse;
-import com.System.Estoque.Dtos.Response.UserDtoResponse;
+import com.System.Estoque.Dto.Request.DtoRequestUserRegister;
+import com.System.Estoque.Dto.Response.LoginResponse;
+import com.System.Estoque.Dto.Response.DtoResponseUser;
 import com.System.Estoque.Entity.User;
 import com.System.Estoque.Repository.RepositoryUser;
-import com.System.Estoque.Services.AuthService;
+import com.System.Estoque.Service.ServiceAuth;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +22,7 @@ import java.time.Duration;
 public class ControllerAuth {
     private final RepositoryUser repositoryUser;
     private final PasswordEncoder passwordEncoder;
-    private final AuthService authService;
+    private final ServiceAuth authService;
 
     @Value("${app.cookie.secure:true}")
     private boolean cookieSecure;
@@ -30,18 +30,18 @@ public class ControllerAuth {
     public ControllerAuth(
             RepositoryUser repositoryUser,
             PasswordEncoder passwordEncoder,
-            AuthService authService
+            ServiceAuth authService
             ) {
         this.repositoryUser = repositoryUser;
         this.passwordEncoder = passwordEncoder;
         this.authService = authService;
-        
+
     }
 
     private static final String SENHA_PADRAO = "estoqueTest";
 
     @PostMapping("/Registro")
-    public ResponseEntity<?> registrodeUsuario(@RequestBody UserDtoRegisterRequest dto) {
+    public ResponseEntity<?> registrodeUsuario(@RequestBody DtoRequestUserRegister dto) {
         Boolean userCpfNew = repositoryUser.existsByCpf(dto.getCpf());
 
         if (userCpfNew) {
@@ -60,7 +60,7 @@ public class ControllerAuth {
     }
 
     @PostMapping("/Login")
-    public ResponseEntity<?> login(@RequestBody UserDtoResponse response) {
+    public ResponseEntity<?> login(@RequestBody DtoResponseUser response) {
         try {
             String token = authService.login(response);
 
@@ -73,7 +73,7 @@ public class ControllerAuth {
                     .httpOnly(true)
                     .secure(cookieSecure)
                     .path("/")
-                    .maxAge(Duration.ofHours(2))
+                    .maxAge(Duration.ofMinutes(10))
                     .sameSite("None")
                     .build();
 

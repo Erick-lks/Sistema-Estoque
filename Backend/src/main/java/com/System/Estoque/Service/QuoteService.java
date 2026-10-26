@@ -1,4 +1,4 @@
-package com.System.Estoque.Services;
+package com.System.Estoque.Service;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.System.Estoque.Dtos.Response;
+package com.System.Estoque.Dto.Response;
 
 
 public record LoginResponse(

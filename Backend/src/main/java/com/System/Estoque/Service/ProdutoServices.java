@@ -1,10 +1,11 @@
-package com.System.Estoque.Services;
+package com.System.Estoque.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import com.System.Estoque.Exeption.NenhumProdutoEncontradoExecption;
+import com.System.Estoque.Exeption.RecursoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,45 +15,49 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.System.Estoque.Dtos.CardResponseDto;
-import com.System.Estoque.Dtos.ProdutoRequestDto;
-import com.System.Estoque.Dtos.ProdutoResponseDto;
+import com.System.Estoque.Dto.Response.DtoResponseCard;
+import com.System.Estoque.Dto.Request.DtoRequestProduto;
+import com.System.Estoque.Dto.Response.DtoResponseProduto;
 import com.System.Estoque.Entity.Produto;
 import com.System.Estoque.Mapper.MapperProduto;
 import com.System.Estoque.Repository.RepositoryProduto;
 
 @Service
-public class ServicesProduto {
+public class ProdutoServices {
 
   private final MapperProduto mapper = new MapperProduto();
 
   @Autowired
   private RepositoryProduto repository;
 
-  public ResponseEntity<Page<ProdutoResponseDto>> listarTodos(
+  public ResponseEntity<Page<DtoResponseProduto>> listarTodos(
       Pageable pageable) {
 
     Page<Produto> produto = repository.findAll(pageable);
 
     if (produto.isEmpty()) {
-      return ResponseEntity.noContent().build();
+      throw new NenhumProdutoEncontradoExecption("Nenhum produto encontrado!");
     }
 
-    Page<ProdutoResponseDto> response = produto.map(mapper::toResponse);
+    Page<DtoResponseProduto> response = produto.map(mapper::toResponse);
 
     return ResponseEntity.ok(response);
   }
 
-  public ResponseEntity<ProdutoResponseDto> listarporId(@PathVariable Long id) {
+  public ResponseEntity<DtoResponseProduto> listarporId(@PathVariable Long id) {
 
     return repository.findById(id)
         .map(mapper::toResponse)
         .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+            .orElseThrow(() ->
+                    new RecursoNaoEncontradoException(
+                            "Produto não encontrado com o ID: " + id
+                    )
+            );
 
   }
 
-  public ResponseEntity<Page<ProdutoResponseDto>> buscandoItem(
+  public ResponseEntity<Page<DtoResponseProduto>> buscandoItem(
       String categoria,
       Pageable pageable) {
 
@@ -64,22 +69,22 @@ public class ServicesProduto {
       produto = repository.findByCategoriaContainingIgnoreCase(categoria, pageable);
     }
 
-    Page<ProdutoResponseDto> response = produto.map(mapper::toResponse);
+    Page<DtoResponseProduto> response = produto.map(mapper::toResponse);
 
     return ResponseEntity.ok(response);
   }
 
-  public ResponseEntity<Page<ProdutoResponseDto>> baixoEstoque(Pageable pageable) {
+  public ResponseEntity<Page<DtoResponseProduto>> baixoEstoque(Pageable pageable) {
 
     Page<Produto> produto = repository.findByQuantidadeLessThan(10, pageable);
 
-    Page<ProdutoResponseDto> response = produto.map(mapper::toResponse);
+    Page<DtoResponseProduto> response = produto.map(mapper::toResponse);
 
     return ResponseEntity.ok(response);
 
   }
 
-  public ResponseEntity<?> cadastrarNovoProduto(@RequestBody ProdutoRequestDto dto) {
+  public ResponseEntity<?> cadastrarNovoProduto(@RequestBody DtoRequestProduto dto) {
 
     Produto entity = mapper.toEntity(dto);
     Produto produtoNovo = repository.save(entity);
@@ -87,9 +92,13 @@ public class ServicesProduto {
     return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(produtoNovo));
   }
 
-  public ProdutoResponseDto aletrarproduto(@PathVariable Long id, @RequestBody ProdutoRequestDto dto) {
+  public DtoResponseProduto aletrarproduto(@PathVariable Long id, @RequestBody DtoRequestProduto dto) {
 
-    Produto produotExiste = repository.findById(id).orElseThrow(() -> new RuntimeException("Categoria não Encontrado"));
+    Produto produotExiste = repository.findById(id).orElseThrow(() ->
+            new RecursoNaoEncontradoException(
+                    "Produto não encontrado com o ID: " + id
+            )
+    );
 
     produotExiste.setProduto(dto.getProduto());
     produotExiste.setCategoria(dto.getCategoria());
@@ -135,7 +144,7 @@ public class ServicesProduto {
     return ResponseEntity.ok().build();
   }
 
-  public CardResponseDto findAllItens() {
+  public DtoResponseCard findAllItens() {
 
     List<Produto> produtos = repository.findAll();
 
@@ -149,7 +158,7 @@ public class ServicesProduto {
 
     int produtosTotal = produtos.size();
 
-    return new CardResponseDto(
+    return new DtoResponseCard(
         totalItens,
         baixoEstoque,
         produtosTotal);

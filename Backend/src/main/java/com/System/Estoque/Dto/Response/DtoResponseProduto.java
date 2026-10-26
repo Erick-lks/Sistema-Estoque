@@ -1,13 +1,12 @@
-package com.System.Estoque.Dtos;
+package com.System.Estoque.Dto.Response;
 
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 
-public class ProdutoResponseDto {
+public class DtoResponseProduto {
 
     private Long id ;
     private String produto;
@@ -23,7 +22,7 @@ public class ProdutoResponseDto {
 
 
 
-    public ProdutoResponseDto(Long id , String produto , String categoria , Integer quantidade, Boolean isActive , LocalDate dataDeInativacao , LocalDate dataReativado){
+    public DtoResponseProduto(Long id , String produto , String categoria , Integer quantidade, Boolean isActive , LocalDate dataDeInativacao , LocalDate dataReativado){
         this.id=id;
            this.produto=produto;
         this.categoria=categoria;

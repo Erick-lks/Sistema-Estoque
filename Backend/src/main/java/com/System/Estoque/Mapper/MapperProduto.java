@@ -2,8 +2,8 @@ package com.System.Estoque.Mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.System.Estoque.Dtos.ProdutoRequestDto;
-import com.System.Estoque.Dtos.ProdutoResponseDto;
+import com.System.Estoque.Dto.Request.DtoRequestProduto;
+import com.System.Estoque.Dto.Response.DtoResponseProduto;
 import com.System.Estoque.Entity.Produto;
 
 import lombok.Data;
@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class MapperProduto {
 
-   public Produto toEntity(ProdutoRequestDto dto){
+   public Produto toEntity(DtoRequestProduto dto){
     Produto novo = new Produto();
     novo.setProduto(dto.getProduto());
     novo.setCategoria(dto.getCategoria());
@@ -20,8 +20,8 @@ public class MapperProduto {
     return novo;
 }
 
-        public ProdutoResponseDto toResponse (Produto entity){
-          return new ProdutoResponseDto(
+        public DtoResponseProduto toResponse (Produto entity){
+          return new DtoResponseProduto(
         entity.getId(),
         entity.getProduto(),
         entity.getCategoria(),

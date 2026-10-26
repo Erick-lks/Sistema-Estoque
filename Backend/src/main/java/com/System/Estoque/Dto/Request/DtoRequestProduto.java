@@ -1,4 +1,4 @@
-package com.System.Estoque.Dtos;
+package com.System.Estoque.Dto.Request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProdutoRequestDto {
+public class DtoRequestProduto {
 
     
     private Long id;
