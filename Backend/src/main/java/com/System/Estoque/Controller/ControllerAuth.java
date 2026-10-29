@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
+import java.util.Map;
 
 
 @RestController
@@ -76,16 +77,18 @@ public class ControllerAuth {
 
             ResponseCookie cookie = ResponseCookie.from("auth_token", token)
                     .httpOnly(true)
-                    .secure(false) //true em prod
-                    .path("/")
-                    .maxAge(Duration.ofHours(1))
+                    .secure(false) // Produção com HTTPS
                     .sameSite("Lax")
+                    .path("/")
+                    .maxAge(Duration.ofMinutes(15))
                     .build();
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                    .body(loginResponse);
-
+                    .body(Map.of(
+                            "nomeCompleto", user.getNomeCompleto(),
+                            "perfil", user.getPerfil().name()
+                    ));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("CPF ou senha inválidos");

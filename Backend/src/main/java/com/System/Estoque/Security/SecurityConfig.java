@@ -42,10 +42,15 @@
             ));
 
             configuration.setAllowedMethods(List.of(
-                    "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"
+                    "GET", "POST", "PUT", "PATCH",
+                    "DELETE", "OPTIONS"
             ));
 
-            configuration.setAllowedHeaders(List.of("*"));
+            configuration.setAllowedHeaders(List.of(
+                    "Content-Type",
+                    "X-CSRF-TOKEN"
+            ));
+
             configuration.setAllowCredentials(true);
 
             UrlBasedCorsConfigurationSource source =

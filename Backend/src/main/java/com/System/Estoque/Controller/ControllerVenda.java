@@ -19,6 +19,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/Vendas")
 @PreAuthorize("isAuthenticated()")
+@CrossOrigin(
+        origins = {
+                "http://localhost:5173",
+                "https://sistema-estoque-seven.vercel.app"
+        },
+        allowCredentials = "true"
+)
 public class ControllerVenda {
 
     @Autowired

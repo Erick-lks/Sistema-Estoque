@@ -10,8 +10,13 @@ import com.System.Estoque.Service.QuoteService;
 
 @RestController
 @RequestMapping("/Api")
-@CrossOrigin(origins = "sistema-estoque-seven.vercel.app")
-@PreAuthorize("hasAnyRole('ADMIN', 'GERENTE')")
+@CrossOrigin(
+        origins = {
+                "http://localhost:5173",
+                "https://sistema-estoque-seven.vercel.app"
+        },
+        allowCredentials = "true"
+)@PreAuthorize("hasAnyRole('ADMIN', 'GERENTE')")
 
 public class ControllerQuotes {
 
