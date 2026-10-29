@@ -76,7 +76,7 @@ public class ControllerAuth {
 
             ResponseCookie cookie = ResponseCookie.from("auth_token", token)
                     .httpOnly(true)
-                    .secure(false)
+                    .secure(false) //true em prod
                     .path("/")
                     .maxAge(Duration.ofHours(1))
                     .sameSite("Lax")
