@@ -1,6 +1,7 @@
 package com.System.Estoque.Service;
 
 
+
 import com.System.Estoque.Dto.Response.DtoResponseUser;
 import com.System.Estoque.Entity.User;
 import com.System.Estoque.Repository.RepositoryUser;
@@ -9,16 +10,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServiceAuth {
+public class AuthService {
 
     private final RepositoryUser repositoryUser;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public ServiceAuth(RepositoryUser repositoryUser , PasswordEncoder passwordEncoder , JwtService jwtService){
-     this.repositoryUser = repositoryUser;
-     this.passwordEncoder= passwordEncoder;
-     this.jwtService= jwtService;
+    public AuthService(RepositoryUser repositoryUser , PasswordEncoder passwordEncoder , JwtService jwtService){
+        this.repositoryUser = repositoryUser;
+        this.passwordEncoder= passwordEncoder;
+        this.jwtService= jwtService;
 
     }
 

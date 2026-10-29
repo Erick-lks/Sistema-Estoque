@@ -8,24 +8,28 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-async function handleLogin(e) {
-  e.preventDefault();
 
-  try {
-    await api.post("/Auth/Login", {
-      cpf,
-      password,
-    });
+  async function handleLogin(e) {
+    e.preventDefault();
 
-    console.log("Login realizado com sucesso");
+    try {
+      const response = await api.post("/Auth/Login", {
+        cpf,
+        password,
+      });
 
-    navigate("/", { replace: true });
-  } catch (error) {
-    console.error("Erro no login:", error);
-    alert("Falha no Login, tente novamente!");
+      const token = response.data.token;
+
+      localStorage.setItem("token", token);
+
+      console.log("Login realizado");
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      alert("Falha no Login, tente novamente!");
+    }
   }
-
-}
 
   return (
     <motion.div

@@ -30,6 +30,7 @@ public class DataInitializer {
                 usuario.setNomeCompleto("Administrador");
                 usuario.setCpf(cpfPadrao);
 
+                // Nunca salvar senha em texto puro
                 usuario.setPassword(
                         passwordEncoder.encode(senhaPadrao)
                 );
